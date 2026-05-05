@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NDX Segurança do Trabalho | Curitiba - PR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --verde-escuro: #0d4a2f;
+      --verde-medio: #1a7a4a;
+      --verde-claro: #2db36e;
+      --verde-neon: #39e87c;
+      --azul-escuro: #0a1628;
+      --azul-medio: #0d2d5e;
+      --azul-claro: #1a5cb8;
+      --azul-brilho: #2e8bff;
+      --branco: #f0f7f4;
+      --branco-puro: #ffffff;
+      --dourado: #c9a84c;
+      --dourado-claro: #f0c94a;
+      --cinza-escuro: #111a14;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background-color: var(--azul-escuro);
+      color: var(--branco);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(10, 22, 40, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(57, 232, 124, 0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 3px;
+      color: var(--branco-puro);
+    }
+
+    .nav-logo span { color: var(--verde-neon); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(240, 247, 244, 0.75);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--verde-neon); }
+
+    .nav-cta {
+      background: var(--verde-medio);
+      color: var(--branco-puro) !important;
+      padding: 10px 24px;
+      border-radius: 4px;
+      transition: background 0.3s !important;
+    }
+
+    .nav-cta:hover { background: var(--verde-claro) !important; color: var(--branco-puro) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 60px 80px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 50%, rgba(26, 92, 184, 0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(13, 74, 47, 0.4) 0%, transparent 60%),
+        linear-gradient(135deg, var(--azul-escuro) 0%, #0b1f3a 50%, var(--verde-escuro) 100%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(57, 232, 124, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57, 232, 124, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(57, 232, 124, 0.1);
+      border: 1px solid rgba(57, 232, 124, 0.35);
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--verde-neon);
+      margin-bottom: 28px;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--verde-neon);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      color: var(--branco-puro);
+      margin-bottom: 24px;
+      animation: fadeDown 0.8s 0.15s ease both;
+    }
+
+    .hero-title .highlight {
+      color: var(--verde-neon);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(240, 247, 244, 0.75);
+      max-width: 520px;
+      margin-bottom: 44px;
+      animation: fadeDown 0.8s 0.3s ease both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeDown 0.8s 0.45s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--verde-claro);
+      color: var(--branco-puro);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 34px;
+      border-radius: 6px;
+      transition: all 0.3s;
+      box-shadow: 0 0 30px rgba(45, 179, 110, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--verde-neon);
+      color: var(--azul-escuro);
+      box-shadow: 0 0 50px rgba(57, 232, 124, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--branco);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 30px;
+      border-radius: 6px;
+      border: 1px solid rgba(240, 247, 244, 0.3);
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--azul-brilho);
+      color: var(--azul-brilho);
+      background: rgba(46, 139, 255, 0.08);
+    }
+
+    .whatsapp-icon { font-size: 1.3rem; }
+
+    /* hero stat cards */
+    .hero-stats {
+      position: absolute;
+      right: 60px;
+      bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 2;
+      animation: fadeLeft 0.9s 0.6s ease both;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(57, 232, 124, 0.2);
+      border-radius: 10px;
+      padding: 20px 28px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      min-width: 160px;
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--verde-neon);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(240,247,244,0.6);
+      margin-top: 4px;
+    }
+
+    /* ── SERVIÇOS ── */
+    #servicos {
+      padding: 100px 60px;
+      background: linear-gradient(180deg, var(--azul-escuro) 0%, #0b1f3a 100%);
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--verde-neon);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 2px;
+      color: var(--branco-puro);
+      line-height: 1;
+    }
+
+    .section-title span { color: var(--azul-brilho); }
+
+    .section-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(240,247,244,0.65);
+      margin-top: 14px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .servico-card {
+      background: linear-gradient(135deg, rgba(13,74,47,0.18) 0%, rgba(10,22,40,0.6) 100%);
+      border: 1px solid rgba(57, 232, 124, 0.15);
+      border-radius: 12px;
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+      cursor: default;
+    }
+
+    .servico-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--verde-medio), var(--azul-brilho));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .servico-card:hover {
+      border-color: rgba(57, 232, 124, 0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35), 0 0 30px rgba(57,232,124,0.08);
+    }
+
+    .servico-card:hover::before { transform: scaleX(1); }
+
+    .servico-icon {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, var(--verde-escuro), var(--azul-medio));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 22px;
+      border: 1px solid rgba(57,232,124,0.2);
+    }
+
+    .servico-sigla {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: 2px;
+      color: var(--verde-neon);
+      margin-bottom: 6px;
+    }
+
+    .servico-nome {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(240,247,244,0.55);
+      margin-bottom: 16px;
+    }
+
+    .servico-desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(240,247,244,0.75);
+    }
+
+    .servico-card .card-num {
+      position: absolute;
+      bottom: 20px;
+      right: 24px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: rgba(57,232,124,0.06);
+      line-height: 1;
+    }
+
+    /* ── POR QUÊ NDX ── */
+    #porque {
+      padding: 100px 60px;
+      background: linear-gradient(135deg, var(--verde-escuro) 0%, #0b1f3a 60%, var(--azul-medio) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #porque::before {
+      content: 'NDX';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28vw;
+      color: rgba(255,255,255,0.02);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      letter-spacing: 10px;
+      pointer-events: none;
+    }
+
+    .porque-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .porque-text .section-header { text-align: left; margin-bottom: 36px; }
+
+    .diferenciais {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .diferencial-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .dif-icon {
+      width: 44px; height: 44px;
+      background: rgba(57,232,124,0.1);
+      border: 1px solid rgba(57,232,124,0.3);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .dif-info h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--branco-puro);
+      margin-bottom: 4px;
+    }
+
+    .dif-info p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(240,247,244,0.65);
+      line-height: 1.6;
+    }
+
+    .porque-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .nr-card {
+      background: rgba(255,255,255,0.04);
+      border-left: 3px solid var(--verde-claro);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      backdrop-filter: blur(6px);
+      transition: all 0.3s;
+    }
+
+    .nr-card:hover {
+      background: rgba(57,232,124,0.08);
+      border-left-color: var(--verde-neon);
+      transform: translateX(6px);
+    }
+
+    .nr-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--verde-neon);
+      min-width: 60px;
+    }
+
+    .nr-desc {
+      font-size: 0.88rem;
+      color: rgba(240,247,244,0.75);
+      line-height: 1.5;
+    }
+
+    /* ── CTA WHATSAPP ── */
+    #contato {
+      padding: 100px 60px;
+      background: var(--azul-escuro);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(45,179,110,0.12) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .cta-content { position: relative; z-index: 2; }
+
+    .cta-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      letter-spacing: 3px;
+      color: var(--branco-puro);
+      margin-bottom: 16px;
+    }
+
+    .cta-title span { color: var(--verde-neon); }
+
+    .cta-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(240,247,244,0.65);
+      margin-bottom: 48px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .wpp-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 20px 48px;
+      border-radius: 60px;
+      transition: all 0.3s;
+      box-shadow: 0 0 40px rgba(37, 211, 102, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wpp-button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .wpp-button:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 0 70px rgba(37, 211, 102, 0.55);
+    }
+
+    .wpp-button:hover::before { opacity: 1; }
+
+    .wpp-icon { font-size: 1.8rem; }
+
+    .cta-info {
+      margin-top: 28px;
+      font-size: 0.85rem;
+      color: rgba(240,247,244,0.45);
+      letter-spacing: 1px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--cinza-escuro);
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(57,232,124,0.1);
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 3px;
+      color: var(--branco-puro);
+    }
+
+    .footer-logo span { color: var(--verde-neon); }
+
+    .footer-text {
+      font-size: 0.82rem;
+      color: rgba(240,247,244,0.4);
+    }
+
+    .footer-location {
+      font-size: 0.82rem;
+      color: rgba(240,247,244,0.4);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── FLOATING WPP ── */
+    .float-wpp {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      z-index: 200;
+      background: #25d366;
+      color: #fff;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: all 0.3s;
+      animation: bounceIn 1s 1s ease both;
+    }
+
+    .float-wpp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(37,211,102,0.6);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes bounceIn {
+      from { opacity: 0; transform: scale(0.5); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      #hero { padding: 100px 24px 200px; }
+      .hero-stats { right: 24px; bottom: 24px; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      #servicos, #porque, #contato { padding: 72px 24px; }
+      .porque-grid { grid-template-columns: 1fr; gap: 40px; }
+      footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">NDX<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#porque">Por que NDX</a></li>
+      <li><a href="#contato" class="nav-cta">Falar com Especialista</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Curitiba — PR &nbsp;|&nbsp; Segurança do Trabalho</div>
+
+      <h1 class="hero-title">
+        Proteja sua<br>
+        <span class="highlight">empresa</span>
+        com quem<br>entende o chão<br>de fábrica.
+      </h1>
+
+      <p class="hero-sub">
+        Consultoria especializada em documentação técnica de segurança do trabalho — PGR, PCMSO, ASO e PPCI. Conformidade com as NRs, sem burocracia.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="https://wa.me/5546991050493?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento%20da%20NDX%20Segurança%20do%20Trabalho." target="_blank" class="btn-primary">
+          <span class="whatsapp-icon">💬</span> Solicitar Orçamento
+        </a>
+        <a href="#servicos" class="btn-secondary">Ver Serviços →</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Conforme NRs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Serviços</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">CWB</div>
+        <div class="stat-label">Curitiba – PR</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="section-header reveal">
+      <div class="section-tag">O que oferecemos</div>
+      <h2 class="section-title">Nossos <span>Serviços</span></h2>
+      <p class="section-desc">Documentação técnica completa para manter sua empresa em conformidade com a legislação brasileira de segurança do trabalho.</p>
+    </div>
+
+    <div class="servicos-grid">
+
+      <div class="servico-card reveal">
+        <div class="servico-icon">📋</div>
+        <div class="servico-sigla">PGR</div>
+        <div class="servico-nome">Programa de Gerenciamento de Riscos</div>
+        <p class="servico-desc">Identificação, avaliação e controle dos riscos ocupacionais presentes no ambiente de trabalho. Obrigatório pela NR-01.</p>
+        <div class="card-num">01</div>
+      </div>
+
+      <div class="servico-card reveal">
+        <div class="servico-icon">🏥</div>
+        <div class="servico-sigla">PCMSO</div>
+        <div class="servico-nome">Programa de Controle Médico de Saúde Ocupacional</div>
+        <p class="servico-desc">Monitoramento da saúde dos trabalhadores com exames periódicos e ações preventivas. Exigido pela NR-07.</p>
+        <div class="card-num">02</div>
+      </div>
+
+      <div class="servico-card reveal">
+        <div class="servico-icon">📄</div>
+        <div class="servico-sigla">ASO</div>
+        <div class="servico-nome">Atestado de Saúde Ocupacional</div>
+        <p class="servico-desc">Emissão de ASO para admissão, demissão, retorno ao trabalho e exames periódicos, conforme NR-07.</p>
+        <div class="card-num">03</div>
+      </div>
+
+      <div class="servico-card reveal">
+        <div class="servico-icon">🔥</div>
+        <div class="servico-sigla">PPCI</div>
+        <div class="servico-nome">Plano de Prevenção e Proteção Contra Incêndio</div>
+        <p class="servico-desc">Elaboração do PPCI conforme exigência do Corpo de Bombeiros do Paraná — aprovação e regularização do seu imóvel.</p>
+        <div class="card-num">04</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- POR QUÊ NDX -->
+  <section id="porque">
+    <div class="porque-grid">
+      <div class="porque-text">
+        <div class="section-header">
+          <div class="section-tag">Nosso diferencial</div>
+          <h2 class="section-title">Por que<br><span style="color:var(--verde-neon)">NDX?</span></h2>
+          <p class="section-desc" style="text-align:left; margin-left:0;">Mais que documentação — entregamos segurança real com visão de engenharia.</p>
+        </div>
+
+        <div class="diferenciais">
+          <div class="diferencial-item reveal">
+            <div class="dif-icon">⚙️</div>
+            <div class="dif-info">
+              <h4>Visão de Engenharia de Produção</h4>
+              <p>Entendemos processos industriais de dentro para fora — nossa análise vai além do papel.</p>
+            </div>
+          </div>
+          <div class="diferencial-item reveal">
+            <div class="dif-icon">📍</div>
+            <div class="dif-info">
+              <h4>Especialistas em Curitiba e Região</h4>
+              <p>Conhecimento das exigências locais do Corpo de Bombeiros-PR e fiscalização regional.</p>
+            </div>
+          </div>
+          <div class="diferencial-item reveal">
+            <div class="dif-icon">⚡</div>
+            <div class="dif-info">
+              <h4>Agilidade e Praticidade</h4>
+              <p>Atendimento direto, sem intermediários. Documentação entregue no prazo com suporte contínuo.</p>
+            </div>
+          </div>
+          <div class="diferencial-item reveal">
+            <div class="dif-icon">🛡️</div>
+            <div class="dif-info">
+              <h4>Conformidade Garantida</h4>
+              <p>Documentos elaborados conforme as NRs vigentes do MTE, evitando autuações e multas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="porque-visual reveal">
+        <div class="nr-card">
+          <div class="nr-num">NR-01</div>
+          <div class="nr-desc">Disposições Gerais e Gerenciamento de Riscos Ocupacionais</div>
+        </div>
+        <div class="nr-card">
+          <div class="nr-num">NR-07</div>
+          <div class="nr-desc">Programa de Controle Médico de Saúde Ocupacional</div>
+        </div>
+        <div class="nr-card">
+          <div class="nr-num">NR-23</div>
+          <div class="nr-desc">Proteção Contra Incêndios nas Edificações</div>
+        </div>
+        <div class="nr-card">
+          <div class="nr-num">CBMPR</div>
+          <div class="nr-desc">Normas do Corpo de Bombeiros do Paraná para PPCI</div>
+        </div>
+        <div class="nr-card">
+          <div class="nr-num">CLT</div>
+          <div class="nr-desc">Conformidade com a Consolidação das Leis do Trabalho</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA CONTATO -->
+  <section id="contato">
+    <div class="cta-glow"></div>
+    <div class="cta-content">
+      <h2 class="cta-title reveal">Sua empresa<br><span>protegida</span> hoje.</h2>
+      <p class="cta-sub reveal">Entre em contato agora e receba um orçamento personalizado sem compromisso. Atendemos empresas de todos os tamanhos em Curitiba e região.</p>
+
+      <a href="https://wa.me/5546991050493?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento%20da%20NDX%20Segurança%20do%20Trabalho." target="_blank" class="wpp-button reveal">
+        <span class="wpp-icon">💬</span>
+        Falar no WhatsApp
+      </a>
+
+      <p class="cta-info reveal">📱 (46) 99105-0493 &nbsp;|&nbsp; Curitiba — PR</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">NDX<span>.</span> Segurança do Trabalho</div>
+    <div class="footer-text">© 2025 NDX Segurança do Trabalho. Todos os direitos reservados.</div>
+    <div class="footer-location">📍 Curitiba, Paraná — Brasil</div>
+  </footer>
+
+  <!-- BOTÃO FLUTUANTE WPP -->
+  <a href="https://wa.me/5546991050493?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento%20da%20NDX%20Segurança%20do%20Trabalho." target="_blank" class="float-wpp" title="Falar no WhatsApp">💬</a>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

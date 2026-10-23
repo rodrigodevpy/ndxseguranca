@@ -654,6 +654,169 @@
       box-shadow: 0 6px 30px rgba(37,211,102,0.6);
     }
 
+    /* ── POP-UP SOFTWARE SST ── */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(5, 12, 24, 0.78);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s;
+    }
+
+    .popup-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-box {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      background: linear-gradient(145deg, #0d2d5e 0%, #0a1628 55%, #0d4a2f 100%);
+      border: 1px solid rgba(57, 232, 124, 0.35);
+      border-radius: 16px;
+      padding: 44px 36px 36px;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 60px rgba(45, 179, 110, 0.15);
+      transform: translateY(24px) scale(0.96);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+    }
+
+    .popup-overlay.open .popup-box { transform: translateY(0) scale(1); }
+
+    .popup-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 16px 16px 0 0;
+      background: linear-gradient(90deg, var(--verde-neon), var(--azul-brilho));
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 36px; height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--branco);
+      font-size: 1.3rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .popup-close:hover { background: rgba(255, 255, 255, 0.18); transform: rotate(90deg); }
+
+    .popup-badge {
+      display: inline-block;
+      background: rgba(57, 232, 124, 0.1);
+      border: 1px solid rgba(57, 232, 124, 0.35);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--verde-neon);
+      margin-bottom: 18px;
+    }
+
+    .popup-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      letter-spacing: 2px;
+      line-height: 1;
+      color: var(--branco-puro);
+      margin-bottom: 14px;
+    }
+
+    .popup-title span { color: var(--verde-neon); }
+
+    .popup-text {
+      font-size: 0.98rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(240, 247, 244, 0.78);
+      margin-bottom: 22px;
+    }
+
+    .popup-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .popup-list li {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(57, 232, 124, 0.18);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--branco);
+    }
+
+    .popup-list li::before { content: '✓ '; color: var(--verde-neon); font-weight: 700; }
+
+    .popup-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 60px;
+      box-shadow: 0 0 30px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s;
+    }
+
+    .popup-cta:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 50px rgba(37, 211, 102, 0.55);
+    }
+
+    .popup-dismiss {
+      margin-top: 14px;
+      background: none;
+      border: none;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(240, 247, 244, 0.5);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .popup-dismiss:hover { color: rgba(240, 247, 244, 0.85); }
+
+    @media (max-width: 480px) {
+      .popup-box { padding: 40px 22px 28px; }
+      .popup-list { grid-template-columns: 1fr; }
+    }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-20px); }
@@ -886,7 +1049,77 @@
   <!-- BOTÃO FLUTUANTE WPP -->
   <a href="https://wa.me/5546991050493?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20orçamento%20da%20NDX%20Segurança%20do%20Trabalho." target="_blank" class="float-wpp" title="Falar no WhatsApp">💬</a>
 
+  <!-- POP-UP SOFTWARE SST -->
+  <div class="popup-overlay" id="popupSST" role="dialog" aria-modal="true" aria-labelledby="popupSSTTitle" aria-hidden="true">
+    <div class="popup-box">
+      <button type="button" class="popup-close" id="popupSSTClose" aria-label="Fechar">&times;</button>
+
+      <div class="popup-badge">Novidade NDX</div>
+      <h2 class="popup-title" id="popupSSTTitle">Software de <span>Gestão de SST</span></h2>
+      <p class="popup-text">Centralize a segurança do trabalho da sua empresa em um só sistema e fique em dia com as obrigações, sem planilhas e sem dor de cabeça.</p>
+
+      <ul class="popup-list">
+        <li>Gestão de documentação</li>
+        <li>Envio do eSocial</li>
+        <li>Gestão de funcionários</li>
+        <li>Controle de treinamentos</li>
+      </ul>
+
+      <a class="popup-cta" id="popupSSTCta" target="_blank" rel="noopener"
+         href="https://wa.me/5546991050493?text=Ol%C3%A1!%20Fiquei%20interessado%20no%20software%20de%20gest%C3%A3o%20de%20SST%20e%20quero%20mais%20informa%C3%A7%C3%B5es.">
+        <span>💬</span> Quero mais informações
+      </a>
+
+      <button type="button" class="popup-dismiss" id="popupSSTDismiss">Agora não</button>
+    </div>
+  </div>
+
   <script>
+    // Pop-up Software SST
+    (function () {
+      var popup = document.getElementById('popupSST');
+      var closeBtn = document.getElementById('popupSSTClose');
+      var dismissBtn = document.getElementById('popupSSTDismiss');
+      var cta = document.getElementById('popupSSTCta');
+      var STORAGE_KEY = 'ndx_popup_sst_visto';
+      var lastFocus = null;
+
+      function jaVisto() {
+        try { return sessionStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
+      }
+
+      function marcarVisto() {
+        try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+      }
+
+      function abrir() {
+        lastFocus = document.activeElement;
+        popup.classList.add('open');
+        popup.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        cta.focus();
+      }
+
+      function fechar() {
+        popup.classList.remove('open');
+        popup.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        marcarVisto();
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      closeBtn.addEventListener('click', fechar);
+      dismissBtn.addEventListener('click', fechar);
+      cta.addEventListener('click', marcarVisto);
+      popup.addEventListener('click', function (e) { if (e.target === popup) fechar(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && popup.classList.contains('open')) fechar();
+      });
+
+      // Abre 6 segundos após carregar, uma vez por visita
+      if (!jaVisto()) setTimeout(abrir, 6000);
+    })();
+
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
